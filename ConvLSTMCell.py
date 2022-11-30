@@ -28,10 +28,9 @@ class ConvLSTMCell(nn.Module):
         self.W_cf = nn.Parameter(torch.Tensor(out_channels, *frame_size))
 
     def forward(self, X, H_prev, C_prev):
-
+       
         # Idea adapted from https://github.com/ndrplz/ConvLSTM_pytorch
         conv_output = self.conv(torch.cat([X, H_prev], dim=1))
-
         # Idea adapted from https://github.com/ndrplz/ConvLSTM_pytorch
         i_conv, f_conv, C_conv, o_conv = torch.chunk(conv_output, chunks=4, dim=1)
 
@@ -46,4 +45,4 @@ class ConvLSTMCell(nn.Module):
         # Current Hidden State
         H = output_gate * self.activation(C)
 
-        return H, C
+        return  H, C
